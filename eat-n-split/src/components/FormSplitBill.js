@@ -1,10 +1,9 @@
 import "../index.css";
-export default function FormSplitBill({ friends, isSelected }) {
-	const friend = friends.filter((friend) => friend.id === isSelected)[0];
-	console.log(friend.name);
+export default function FormSplitBill({ friends, selectedID }) {
+	const friend = friends.find((f) => f.id === selectedID);
 	return (
 		<form action="" className="form-split-bill">
-			<h2>Split bill with</h2>
+			<h2>Split bill with {friend.name}</h2>
 			<label htmlFor="">💰 Bill value</label>
 			<input type="text" name="" id="" placeholder="Bill value" />
 			<label htmlFor="">😎 Your expense</label>

@@ -1,12 +1,12 @@
 import "../index.css";
 
-export default function Friend({ friend, isSelected, handleSelect }) {
+export default function Friend({ friend, selectedID, handleSelect }) {
 	const { name, image, balance } = friend;
 	const handleClick = () => {
-		handleSelect(friend.id === isSelected ? null : friend.id);
+		handleSelect(friend.id === selectedID ? null : friend.id);
 	};
 	return (
-		<li key={friend.id} className={friend.id === isSelected ? "selected" : ""}>
+		<li key={friend.id} className={friend.id === selectedID ? "selected" : ""}>
 			<img src={image} alt={name} />
 			<h3>{name}</h3>
 			<p className={`${balance < 0 ? "red" : balance > 0 ? "green" : ""}`}>
@@ -17,7 +17,7 @@ export default function Friend({ friend, isSelected, handleSelect }) {
 					: `You and ${name} are even`}
 			</p>
 			<button className="button" onClick={handleClick}>
-				{friend.id === isSelected ? "Close" : "Select"}
+				{friend.id === selectedID ? "Close" : "Select"}
 			</button>
 		</li>
 	);
