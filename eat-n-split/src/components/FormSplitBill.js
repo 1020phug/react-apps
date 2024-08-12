@@ -1,14 +1,20 @@
 import "../index.css";
 import { useState } from "react";
-export default function FormSplitBill({ friends, selectedID }) {
+export default function FormSplitBill({ friends, selectedID, handleSpliting }) {
 	const friend = friends.find((f) => f.id === selectedID);
 
 	const [billValue, setBillValue] = useState("");
 	const [yourExpense, setYourExpense] = useState("");
 	const friendExpense = billValue ? billValue - yourExpense : "";
 	const [payer, setPayer] = useState("you");
+
+	const handleSplit = (e) => {
+		e.preventDefault();
+		if (!billValue || !yourExpense) return;
+		handleSpliting(payer === "you" ? yourExpense : friendExpense);
+	};
 	return (
-		<form action="" className="form-split-bill">
+		<form action="" className="form-split-bill" onSubmit={handleSplit}>
 			<h2>Split bill with {friend.name}</h2>
 			<label htmlFor="">💰 Bill value</label>
 			<input

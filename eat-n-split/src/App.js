@@ -40,6 +40,17 @@ function App() {
 	const handleSelect = (id) => {
 		setSelectedId(id);
 	};
+
+	const handleSpliting = (value) => {
+		setFriends((friends) =>
+			friends.map((friend) =>
+				friend.id === selectedID
+					? { ...friend, balance: friend.balance + value }
+					: friend
+			)
+		);
+		setSelectedId(null);
+	};
 	return (
 		<div className="app">
 			<div className="sidebar">
@@ -59,7 +70,11 @@ function App() {
 				</button>
 			</div>
 			{selectedID && (
-				<FormSplitBill friends={friends} selectedID={selectedID} />
+				<FormSplitBill
+					friends={friends}
+					selectedID={selectedID}
+					handleSpliting={handleSpliting}
+				/>
 			)}
 		</div>
 	);
